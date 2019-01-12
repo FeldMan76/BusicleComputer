@@ -78,11 +78,11 @@ void loop() {                                         // Основной мет
   }
   else                                                // Если режим редактирования запущен
   {
-    if (digitalRead(btnMode) == LOW) {                // Обработчик кнопки смены режима
+    if (digitalRead(btnMode) == LOW) {                // Проверяем, нажата ли кнопка смены режима, если нажата, то
       Set_millis = millis();                          // Обновляем время последнего нажатия кнопки
-      myOLED.clrScr();
-      if (curMode < 3) { curMode++; }
-      else { curMode = 1; }
+      myOLED.clrScr();                                // Очищаем дисплей
+      if (curMode < 3) { curMode++; }                 // Если выбран 3 пункт меню, то
+      else { curMode = 1; }                           // Переходим к первому пункту
     }
     writeDispSetMode(curMode);
 
@@ -185,21 +185,21 @@ void toSet() {
 //=============================================== Функция вывода меню настройки в зависимости от выбранного пункта
 void writeDispSetMode(byte curMode) {
   if (curMode == 1) {
-    myOLED.print(">> SET RADIUS +0.5   ", OLED_C, 1);
-    myOLED.print(radius, OLED_C, 2);
-    myOLED.print("CANCEL", OLED_C, 3);
-    myOLED.print("SAVE", OLED_C, 4);
+    myOLED.print(">> SET RADIUS +0.5   ", OLED_C, 1); // Выводим текст по центру 1 строки. Текст будет написан белыми буквами на чёрном фоне.
+    myOLED.print(radius, OLED_C, 2);                  // Выводим радиус колеса во 2 строку
+    myOLED.print("CANCEL", OLED_C, 3);                // Выводим текст по центру 3 строки. Текст будет написан белыми буквами на чёрном фоне. 
+    myOLED.print("SAVE", OLED_C, 4);                  // Выводим текст по центру 4 строки. Текст будет написан белыми буквами на чёрном фоне.
   }
   if (curMode == 2) {
-    myOLED.print("SET RADIUS +0.5", OLED_C, 1);
-    myOLED.print(radius, OLED_C, 2);
-    myOLED.print(">> CANCEL   ", OLED_C, 3);
-    myOLED.print("SAVE", OLED_C, 4);
+    myOLED.print("SET RADIUS +0.5", OLED_C, 1);       // Выводим текст по центру 1 строки. Текст будет написан белыми буквами на чёрном фоне.
+    myOLED.print(radius, OLED_C, 2);                  // Выводим радиус колеса во 2 строку
+    myOLED.print(">> CANCEL   ", OLED_C, 3);          // Выводим текст по центру 3 строки. Текст будет написан белыми буквами на чёрном фоне.
+    myOLED.print("SAVE", OLED_C, 4);                  // Выводим текст по центру 4 строки. Текст будет написан белыми буквами на чёрном фоне.
   }
   if (curMode == 3) {
-    myOLED.print("SET RADIUS +0.5", OLED_C, 1);
-    myOLED.print(radius, OLED_C, 2);
-    myOLED.print("CANCEL", OLED_C, 3);
-    myOLED.print(">> SAVE   ", OLED_C, 4);
+    myOLED.print("SET RADIUS +0.5", OLED_C, 1);       // Выводим текст по центру 1 строки. Текст будет написан белыми буквами на чёрном фоне.
+    myOLED.print(radius, OLED_C, 2);                  // Выводим радиус колеса во 2 строку
+    myOLED.print("CANCEL", OLED_C, 3);                // Выводим текст по центру 3 строки. Текст будет написан белыми буквами на чёрном фоне.
+    myOLED.print(">> SAVE   ", OLED_C, 4);            // Выводим текст по центру 4 строки. Текст будет написан белыми буквами на чёрном фоне.
   }
 }
