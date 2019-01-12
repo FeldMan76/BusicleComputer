@@ -50,6 +50,9 @@ void setup(){                                 // Первичная настро
 
 //=============================================== Функция главная
 void loop(){                                        // Основной метод программы
+  if (digitalRead(3) == LOW) {
+    toSet();
+  }
   if (setMode == false) {
   if (millis()%1000 == 0) {                         // Обновление дисплея будет происходить каждую секунду
     if (millis()-prev_millis < 3000) {              // Если получен сигнал не более 3 секунд назад, вычисляем скорость, иначе скорость 0 
@@ -118,8 +121,6 @@ void readDist(){
   myOLED.print("ALL DIST", OLED_C, 1);  // Выводим текст по центру 1 строки. Текст будет написан белыми буквами на чёрном фоне. 
   EEPROM.get( eeAddressDist, getDist);      // Получаем пройденное расстояние всего из памяти
   myOLED.print(getDist, OLED_C, 2);     // Выводим полученное расстояние по центру 2 строки. Текст будет написан белыми буквами на чёрном фоне.
-  
-  
   myOLED.print("RADIUS", OLED_C, 3);
   myOLED.print(radius, OLED_C, 4);
   delay(2000);                          // Показываем 2 секунды
@@ -131,8 +132,8 @@ void readDist(){
 void Sleep_on(){
   rounds = 0;                                     // Обнуляем переменную rounds, хранящую количество полных оборотов колеса
   currDist = 0;                                   // Обнуляем пройденное расстояние
-  attachInterrupt(0, wakeon, FALLING);            // Настраиваем прерывание на выводе D2, вызывающее фцнкцию wakeon, при падении уровня с HIGH до LOW 
   detachInterrupt(1); 
+  attachInterrupt(0, wakeon, FALLING);            // Настраиваем прерывание на выводе D2, вызывающее фцнкцию wakeon, при падении уровня с HIGH до LOW 
   sleep_enable();                                 // Разрешаем спящий режим
   sleep_mode();                                   // Засыпаем
 }
@@ -143,7 +144,6 @@ void wakeon(){
   detachInterrupt(0);                             // Отключаем прерывания
   curr_millis = millis();                         // Определяем последнее срабатывание датчика оборотов (для спящего режима через 30 сек)
   attachInterrupt(0, inc, FALLING);               // Настраиваем прерывание на выводе D2, вызывающее фцнкцию inc, при падении уровня с HIGH до LOW
-  attachInterrupt(1, toSet, FALLING);
 } 
 
 void toSet() {
